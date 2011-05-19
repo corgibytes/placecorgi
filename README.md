@@ -1,38 +1,25 @@
-fakeimage
-=========
+# placecorgi
 
-A small Sinatra app influenced by http://dummyimage.com, but written in Ruby.
 
-Try it online at [http://fakeimage.heroku.com](http://fakeimage.heroku.com)
+A small Sinatra app influenced by http://placekitten.com. This application is based on the source code for fakeimage which was a Ruby inspired twist of http://dummyimage.com.
 
-Installation
-============
+## Installation
 
-requires ruby 1.8.7 (MRI/REE) or 1.9.2 (YARV)
+requires ruby 1.9.2
 
-    sudo gem install sinatra rmagick
-    ruby fakeimage.rb (or your rack-app-handler of choice)
+dependent gems are installed with bundler `bundle install`.
 
-*Note:* If deploying your own copy to Heroku, use their [Bamboo stack](http://docs.heroku.com/bamboo). I've not had success with Ruby 1.9.1, but REE 1.8.7 is fine.
 
-Use
-===
+## Use
 
-In a browser, hit `http://localhost:4567/300x200` for example, or change bg and text colors by passing them as GET params:
+For a 300 x 200 pixel image, visit `http://localhost:4567/300x200`.
 
-`http://localhost:4567/95x150?color=red&textcolor=orange`
+Leaving off the second dimension will display a square, so for a 200 x 200 pixel image, visit `http://localhost:4567/200`. Visiting `http://localhost:4567/200x200` will work, too, but why type more than you have to?
 
-Leave off the second dimension for a square.
+This application only generates png files.
 
-`http://localhost:4567/200`
+## Copyright
 
-Multiple image formats are supported. Just add an extension to the size (e.g. `http://localhost:4567/300x200.gif`) to get that format. png (default), gif, and jpg are supported currently.
+Because this project was started by using fakeimage as a starting point, portions of this application are copyright (c) 2010-2011 Michael Dungan, mpd@jesters-court.net, released under the MIT license.
 
-See [the ImageMagick documentation](http://www.imagemagick.org/script/color.php#color_names) for the canonical list of colors. Hex colors are also supported, but with the # replaced with a !, like `http://localhost:4567/400x300?color=!849593` In the future, hex colors may be the sole representation of colors.
-
-Copyright
-=========
-
-Copyright (c) 2010-2011 Michael Dungan, mpd@jesters-court.net, released under the MIT license
-
-The included Droid Sans font is licensed under the Apache License, online at [http://www.apache.org/licenses/LICENSE-2.0](http://www.apache.org/licenses/LICENSE-2.0).
+The rest of the application is copyright (c) 2011 Corgibytes LLC (http://www.corgibytes.com) and are also released under the MIT license.
