@@ -1,4 +1,5 @@
 source 'http://rubygems.org'
+gem 'rack', '~> 1.2.2'
 gem 'sinatra', '~> 1.2'
 gem 'chunky_png', '~> 1.2.0'
 
