@@ -1,6 +1,5 @@
 # placecorgi
 
-
 A small Sinatra app influenced by http://placekitten.com. This application is based on the source code for fakeimage which was a Ruby inspired twist of http://dummyimage.com.
 
 ## Installation
