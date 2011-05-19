@@ -1,2 +1,2 @@
-require File.expand_path('./placecorgi', File.dirname(__FILE__))
+require File.expand_path('../app/placecorgi', __FILE__)
 run Sinatra::Application
