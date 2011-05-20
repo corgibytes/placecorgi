@@ -1,4 +1,6 @@
 require 'sinatra'
+require 'oily_png'
+require 'stringio'
 
 get '/' do
   "<p>Welcome to placecorgi!</p>"
@@ -6,18 +8,29 @@ end
 
 get '/:size' do
   begin
-    wh, format = params[:size].downcase.split('.')
-    format = FORMATS[format] || 'png'
-
-    width, height = wh.split('x').map { |wat| wat.to_i }
+    width_height = params[:size]
+    width, height = width_height.split('x').map { |wat| wat.to_i }
 
     height = width unless height
 
-    content_type "image/png"
-    img.to_blob
+    image_path = File.expand_path('../../public/images/corgis/ein-textmate.png', __FILE__)
+    datastream = ChunkyPNG::Datastream.from_file(image_path)
+    image = ChunkyPNG::Canvas.from_datastream(datastream)
+    resized_image = image.resize(width, height)
+    
+    image_data = StringIO.new
+    resized_image.write(image_data)
+    
+    send_data image_data, 
+      :type => 'image/png'
 
   rescue Exception => e
-    "<p>Something broke.</p>"
+    $stderr.puts e.message
+    $stderr.puts e.backtrace
+    
+    body do
+      "<p>Something went wrong.</p>"
+    end
+    status = 500
   end
-
 end
