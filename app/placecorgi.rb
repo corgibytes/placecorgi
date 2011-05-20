@@ -21,9 +21,13 @@ get '/:size' do
     image_data = StringIO.new
     resized_image.write(image_data)
     
-    send_data image_data, 
-      :type => 'image/png'
-
+    content_type 'image/png'
+    response['Content-Disposition'] = 'inline'
+    response['Content-Length'] = image_data.length.to_s
+    
+    image_data.seek(0)
+    halt image_data
+    
   rescue Exception => e
     $stderr.puts e.message
     $stderr.puts e.backtrace
